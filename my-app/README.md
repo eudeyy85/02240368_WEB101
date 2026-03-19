@@ -53,7 +53,41 @@ Step 2: Rebuild MainLayout with a sidebar
 
 Step 3: VideoCard Component
 > create a feed similar to TikTok's web version. Create a new file "src/components/ui/VideoCard.jsx:"
+    > VideoCard.jsx is a single post card. It receives a post prop (the post's data) and displays:
+    > Username, caption, audio name
+    A video placeholder box (300×530px black box)
+    Like/comment/share buttons.
 
 Step 4: VideoFeed Component
 > Create a new file src/components/ui/VideoFeed.jsx:
+> VideoFeed.jsx has a list of fake posts, and for each post it creates and shows one VideoCard on screen.
 
+Step 5: created page.jsx.
+> Create pages for each section (profile, upload, following, explore, live, login, signup) using the MainLayout component.
+
+PART 3 : Creating Login and Registration Forms.
+Step 1 Key concept: React Hook Form.
+> You call useForm() once to manage state for every input field and get back:
+    > const { register, handleSubmit, watch, formState: { errors } } = useForm();
+> register('email', { required: 'Email is required' }) — attaches an input to the form and sets its validation rules.
+> handleSubmit(onSubmit) — wraps your submit function; only calls it if all validations pass
+> errors.email.message — holds the error message to display under the input
+> watch('password') — reads the current value of password so you can compare it against confirmPassword.
+
+Step 2: Login page.
+> The login form has two boxes — email and password.
+    > When you click submit:
+
+    - It checks both fields are filled in
+    - Shows "Logging in..." on the button while waiting
+    - After 1.5 seconds, pops up a success message
+
+Step 3: Signup page.
+> Username: min 3 chars, only letters/numbers/underscores (regex: /^[a-zA-Z0-9_]+$/)
+> Email: must match proper email format (regex pattern)
+> Password: min 8 chars, must contain uppercase, lowercase, number, and special character
+> Confirm password: uses validate: value => value === password || 'Passwords do not match' — a custom function that compares the two fields
+> Terms checkbox: required before the form will submit
+
+Step 4: Connect forms to navigation.
+> The MainLayout.jsx sidebar's Login button becomes a <Link href="/login"> and the signup button links to /signup. The header's Log In button does the same.
